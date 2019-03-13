@@ -211,7 +211,6 @@ production:
       --set application.track="$track" \
       --set application.secretName="$APPLICATION_SECRET_NAME" \
       --set application.secretChecksum="$APPLICATION_SECRET_CHECKSUM" \
-      --set service.commonName="le.$KUBE_INGRESS_BASE_DOMAIN" \
       --set service.url="$CI_ENVIRONMENT_URL" \
       --set replicaCount="$replicas" \
       --namespace="$KUBE_NAMESPACE" \
