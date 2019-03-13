@@ -1,0 +1,16 @@
+FROM golang:1.12-alpine
+
+RUN apk update && apk add --no-cache git ca-certificates bash inotify-tools && update-ca-certificates
+
+COPY ./dev/go-reload /bin/go-reload
+
+WORKDIR /app
+
+COPY ./app/go.mod /app/
+COPY ./app/go.sum /app/
+
+RUN go mod download
+
+COPY ./app/* /app/
+
+CMD ["go-reload", "/app/*.go"]

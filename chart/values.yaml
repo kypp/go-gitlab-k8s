@@ -1,0 +1,42 @@
+replicaCount: 1
+image:
+  repository: gitlab.example.com/group/project
+  tag: stable
+  pullPolicy: Always
+  secrets:
+    - name: gitlab-registry
+application:
+  track: stable
+  tier: web  
+  migrateCommand:
+  initializeCommand:
+  secretName:
+  secretChecksum:
+service:
+  enabled: true
+  name: web
+  type: ClusterIP
+  url: http://my.host.com/
+  additionalHosts:
+  commonName:
+  externalPort: 3000
+  internalPort: 3000
+ingress:
+  tls:
+    enabled: true
+    secretName: ""
+livenessProbe:
+  path: "/healthz"
+  initialDelaySeconds: 15
+  timeoutSeconds: 15
+readinessProbe:
+  path: "/healthz"
+  initialDelaySeconds: 5
+  timeoutSeconds: 3
+resources:
+#  limits:
+#    cpu: 100m
+#    memory: 128Mi
+#  requests:
+#    cpu: 100m
+#    memory: 128Mi
