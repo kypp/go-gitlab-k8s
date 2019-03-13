@@ -11,17 +11,18 @@ Quick parachute drop without cloning:
   curl -L https://github.com/kypp/go-gitlab-k8s/archive/master.tar.gz | tar xz --strip-components 1
 ```
 
-After the drop:
-1. Ensure the `KUBE_INGRESS_BASE_DOMAIN` is set, either on a higher level (see [documentation](https://docs.gitlab.com/ee/topics/autodevops/#auto-devops-base-domain)) or by uncommenting the 7th line in the `.gitlab-ci.yml` file
-2. Create the GitLab project 
-3. In `Settings->Repository->Deploy Tokens` create a token named `gitlab-deploy-token` with `read_registry` scope (see [here](https://docs.gitlab.com/ee/user/project/deploy_tokens/#gitlab-deploy-token) for explanation)
-4. Push to GitLab
+Stuff you might want to do after the drop:
+1. Change the go module name in app/go.mod and chart name in chart/Chart.yaml
+2. Ensure the `KUBE_INGRESS_BASE_DOMAIN` is set, either on a higher level (see [documentation](https://docs.gitlab.com/ee/topics/autodevops/#auto-devops-base-domain)) or by uncommenting the 7th line in the `.gitlab-ci.yml` file
+3. Create the GitLab project 
+4. In `Settings->Repository->Deploy Tokens` create a token named `gitlab-deploy-token` with `read_registry` scope (see [here](https://docs.gitlab.com/ee/user/project/deploy_tokens/#gitlab-deploy-token) for explanation)
+5. Push to GitLab
 
 ---
 
 Includes:
 - two-stage production Dockerfile for optimal image size
-- docker-compose for development with live reload
+- docker-compose for development with live reload (for local development simply `docker-compose up`)
 - automated kubernetes deployment based on GitLab autodevops
 - basic health check endpoint (at /healthz)
 
